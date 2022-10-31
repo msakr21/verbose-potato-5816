@@ -1,5 +1,5 @@
 <h1> Customer: <%= @customer.name %> </h1>
 <h2> Items: </h2>
 <% @customer_items.each do |item|%>
-  <%= "Name: #{item.name}, Price: $#{item.price}, Supermarket: #{item.supermarket.name}" %>
+  <%= "Name: #{item.name}, Price: $#{item.price}, Supermarket: #{item.supermarket.name}" %><br>
 <%end%>
