@@ -10,6 +10,7 @@ RSpec.describe "customer show page" do
     @apple = @sally.items.create!(name: "Apple", price: 2, supermarket_id: @costco.id)
     @cheese = @mufasa.items.create!(name: "Cheese", price: 3, supermarket_id: @target.id)
     @shirt = @mufasa.items.create!(name: "Shirt", price: 18, supermarket_id: @target.id)
+    @kiwi =Item.create!(name: "Kiwi", price: 3, supermarket_id: @costco.id)
   end
 
   it "shows a customer's name and a list of items that include name, price and supermarket they belong to" do
@@ -21,5 +22,18 @@ RSpec.describe "customer show page" do
     expect(page).to have_content("Name: Apple, Price: $2, Supermarket: Costco")
     expect(page).to_not have_content("Cheese")
     expect(page).to_not have_content("Mufasa")
+  end
+
+  it "has a form with a field for item id and a submit button to add an item to customer" do
+    visit "/customers/#{@sally.id}"
+
+    expect(page).to_not have_content("Kiwi")
+    expect(page).to have_selector(:css, "form")
+
+    fill_in "item_id", with: @kiwi.id
+    click_on "Submit"
+
+    expect(current_path).to eql("/customers/#{@sally.id}")
+    expect(page).to have_content("Kiwi")
   end
 end
