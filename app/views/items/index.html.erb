@@ -1,0 +1,4 @@
+<h1> Item List: </h1>
+<% @items.each do |item|%>
+  <%= "Name: #{item.name}, Price: $#{item.price}, Supermarket: #{item.supermarket.name}, Number of times bought: #{item.customer_count}" %><br>
+<%end%>
